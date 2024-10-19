@@ -9,7 +9,6 @@ private:
     int capacity;
     int size;
 
-    // Hash function
     int hashFunction(int key) {
         return key % capacity;
     }
@@ -23,7 +22,7 @@ private:
         return true;
     }
 
-    // Helper function to get the next prime number
+    // To get the next prime number
     int getNextPrime(int n) {
         while (!isPrime(n)) {
             n++;
@@ -31,7 +30,7 @@ private:
         return n;
     }
 
-    // Resize the table when load factor exceeds the threshold
+    // Resize the table when load factor exceeds the limit
     void resizeTable() {
         int newCapacity = getNextPrime(2 * capacity);
         vector<int> newTable(newCapacity, -1);
@@ -57,12 +56,12 @@ public:
     HashTable(int initialCapacity) {
         capacity = initialCapacity;
         size = 0;
-        table.resize(capacity, -1);  // -1 indicates an empty slot
+        table.resize(capacity, -1);   
     }
 
     void insert(int key) {
         if (size / (double)capacity >= 0.8) {
-            resizeTable();  // Resize if load factor exceeds 0.8
+            resizeTable();   
         }
 
         int index = hashFunction(key);
@@ -90,7 +89,7 @@ public:
         int i = 1;
         while (table[index] != -1) {
             if (table[index] == key) {
-                table[index] = -1;  // Mark the spot as empty
+                table[index] = -1;   
                 size--;
                 return;
             }
@@ -110,7 +109,7 @@ public:
             index = (hashFunction(key) + i * i) % capacity;
             i++;
         }
-        return -1;  // Key not found
+        return -1;   
     }
 
     void printTable() {
